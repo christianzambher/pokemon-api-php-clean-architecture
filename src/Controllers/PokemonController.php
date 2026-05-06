@@ -2,8 +2,16 @@
 
 namespace App\Controllers;
 
+use App\Services\PokemonService;
+
 class PokemonController
 {
+    private PokemonService $pokemonService;
+
+    public function __construct()
+    {
+        $this->pokemonService = new PokemonService();
+    }
     public function save(array $data)
     {
         // Validación básica
@@ -15,10 +23,6 @@ class PokemonController
             ];
         }
 
-        // Temporal (luego irá al Service)
-        return [
-            'message' => 'Pokemon recibido correctamente',
-            'pokemon' => $data['pokemon']
-        ];
+        return $this->pokemonService->savePokemon($data['pokemon']);
     }
 }

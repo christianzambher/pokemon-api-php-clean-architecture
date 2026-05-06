@@ -35,3 +35,12 @@ POST /pokemon
 
 Body:
 pokemon: string
+
+## Arquitectura
+
+El proyecto sigue una arquitectura por capas:
+
+- Controllers: manejo de request/response
+- Services: lógica de negocio
+- Repositories: acceso a datos (pendiente)
+- Clients: consumo de APIs externas
