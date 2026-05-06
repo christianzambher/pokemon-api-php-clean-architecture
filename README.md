@@ -22,3 +22,9 @@ src/
 
 composer install
 cp .env.example .env
+
+## Desarrollo
+
+Para actualizar el autoload al agregar nuevas clases:
+
+composer dump-autoload
