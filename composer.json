@@ -1,0 +1,13 @@
+{
+    "name": "christianzh/pokemon-api-php-clean-architecture",
+    "authors": [
+        {
+            "name": "Christian Emmanuel Zambrano Hernandez",
+            "email": "christianzambher@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^7.0",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
