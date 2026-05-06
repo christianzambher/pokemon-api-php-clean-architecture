@@ -19,10 +19,7 @@ $router->add('POST', '/pokemon', function () {
     $controller = new PokemonController();
     $result = $controller->save($_POST);
 
-    echo json_encode([
-        'success' => true,
-        'data' => $result
-    ]);
+    echo json_encode($result);
 });
 
 // Ejecutar router

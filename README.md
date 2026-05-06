@@ -28,3 +28,10 @@ cp .env.example .env
 Para actualizar el autoload al agregar nuevas clases:
 
 composer dump-autoload
+
+## Endpoint
+
+POST /pokemon
+
+Body:
+pokemon: string
