@@ -201,3 +201,16 @@ Body:
   "pokemon": "pikachu"
 }
 ```
+
+## Configuración de Correo
+
+Agregar las siguientes variables al archivo `.env`:
+
+```env
+MAIL_HOST=
+MAIL_PORT=
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_FROM=
+MAIL_FROM_NAME=
+```
