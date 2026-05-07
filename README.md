@@ -1,62 +1,203 @@
-# Pokemon API PHP - Clean Architecture
+# Pokemon API PHP Clean Architecture
 
-Proyecto backend en PHP puro estructurado con arquitectura por capas.
+Proyecto backend desarrollado en PHP puro utilizando arquitectura por capas, consumo de APIs externas, procedimientos almacenados y auditoría mediante triggers.
 
 ## Características
 
+- PHP puro con Composer
+- Arquitectura tipo Clean Architecture
 - Consumo de PokeAPI
-- Persistencia en base de datos
-- Envío de correos con PHPMailer
-- Uso de variables de entorno (.env)
+- Stored Procedures
+- Triggers de auditoría
+- Variables de entorno con dotenv
+- Router personalizado
+- Integración con MySQL
+- Patrón Controller / Service / Repository
 
-## Estructura
+---
 
+# Estructura del Proyecto
+
+```bash
 src/
-  Controllers/
-  Services/
-  Repositories/
-  Clients/
-  Config/
+├── Clients/
+├── Config/
+├── Controllers/
+├── Repositories/
+├── Services/
 
-## Instalación
+database/
+├── procedures/
+├── schema/
+├── triggers/
 
+public/
+storage/
+```
+
+---
+
+# Tecnologías Utilizadas
+
+- PHP 8+
+- MySQL
+- Composer
+- PHPMailer
+- vlucas/phpdotenv
+
+---
+
+# Configuración del Proyecto
+
+## 1. Clonar repositorio
+
+```bash
+git clone <repo-url>
+```
+
+---
+
+## 2. Instalar dependencias
+
+```bash
 composer install
-cp .env.example .env
+```
 
-## Desarrollo
+---
 
-Para actualizar el autoload al agregar nuevas clases:
+## 3. Configurar variables de entorno
 
-composer dump-autoload
+Crear archivo:
 
-## Endpoint
+```bash
+.env
+```
 
-POST /pokemon
+Basado en:
 
-Body:
-pokemon: string
+```bash
+.env.example
+```
 
-## Arquitectura
+Ejemplo:
 
-El proyecto sigue una arquitectura por capas:
+```env
+DB_DSN=mysql:host=localhost;dbname=Pokedex
+DB_USER=root
+DB_PASS=
+```
 
-- Controllers: manejo de request/response
-- Services: lógica de negocio
-- Repositories: acceso a datos (pendiente)
-- Clients: consumo de APIs externas
+---
 
-## Base de Datos
+# Base de Datos
 
-El proyecto utiliza un stored procedure:
+## Crear estructura
 
-spRegistrarPokemon
+Ejecutar:
 
-Encargado de persistir la información del Pokémon en la base de datos.
+```bash
+database/schema/create_tables.sql
+```
 
-## Integración externa
+---
 
-El proyecto consume información desde PokeAPI:
+## Crear Stored Procedures
+
+Ejecutar:
+
+```bash
+database/procedures/spRegistrarPokemon.sql
+database/procedures/spBorrarPokemon.sql
+```
+
+---
+
+## Crear Triggers
+
+Ejecutar:
+
+```bash
+database/triggers/pokemon_triggers.sql
+database/triggers/habilidad_triggers.sql
+database/triggers/sprite_triggers.sql
+```
+
+---
+
+# Arquitectura
+
+El proyecto implementa separación de responsabilidades:
+
+## Controllers
+Manejo de request y response.
+
+## Services
+Lógica de negocio.
+
+## Repositories
+Persistencia y acceso a base de datos.
+
+## Clients
+Consumo de APIs externas.
+
+---
+
+# Auditoría
+
+Los triggers registran automáticamente:
+
+- INSERT
+- UPDATE
+- DELETE
+
+sobre las entidades principales.
+
+Los eventos son almacenados en la tabla:
+
+```bash
+Bitacoras
+```
+
+---
+
+# API Externa
+
+El proyecto consume información desde:
 
 https://pokeapi.co/
 
-Los datos son transformados por la capa Client antes de ser persistidos.
+---
+
+# Desarrollo
+
+Actualizar autoload de Composer:
+
+```bash
+composer dump-autoload
+```
+
+---
+
+# Ejecutar proyecto
+
+```bash
+php -S localhost:8000 -t public
+```
+
+---
+
+# Endpoint Actual
+
+## Registrar Pokémon
+
+```http
+POST /pokemon
+```
+
+Body:
+
+```json
+{
+  "pokemon": "pikachu"
+}
+```
