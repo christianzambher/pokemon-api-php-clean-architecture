@@ -214,3 +214,13 @@ MAIL_PASSWORD=
 MAIL_FROM=
 MAIL_FROM_NAME=
 ```
+
+## Notificaciones por Correo
+
+El sistema envía automáticamente una notificación al registrar un Pokémon.
+
+Implementado mediante:
+
+- PHPMailer
+- SMTP
+- Variables de entorno
