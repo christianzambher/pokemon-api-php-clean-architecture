@@ -52,3 +52,11 @@ El proyecto utiliza un stored procedure:
 spRegistrarPokemon
 
 Encargado de persistir la información del Pokémon en la base de datos.
+
+## Integración externa
+
+El proyecto consume información desde PokeAPI:
+
+https://pokeapi.co/
+
+Los datos son transformados por la capa Client antes de ser persistidos.

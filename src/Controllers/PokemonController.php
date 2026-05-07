@@ -14,7 +14,7 @@ class PokemonController
     }
     public function save(array $data)
     {
-        if (empty($data['nomPokemon'])) {
+        if (empty($data['pokemon'])) {
             http_response_code(400);
 
             return [
@@ -22,14 +22,6 @@ class PokemonController
             ];
         }
 
-        $payLoad = [
-            'nombre' => $data['nomPokemon'],
-            'numero' => $data['numPokemon'],
-            'habilidad' => $data['habPokemon'],
-            'sprite' => $data['sprtPokemon'],
-            'sprite_url' => $data['urlSprtPokemon'],
-        ];
-
-        return $this->pokemonService->savePokemon($payLoad);
+        return $this->pokemonService->savePokemon($data['pokemon']);
     }
 }
