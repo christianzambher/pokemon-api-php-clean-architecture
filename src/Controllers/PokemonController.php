@@ -14,8 +14,7 @@ class PokemonController
     }
     public function save(array $data)
     {
-        // Validación básica
-        if (empty($data['pokemon'])) {
+        if (empty($data['nomPokemon'])) {
             http_response_code(400);
 
             return [
@@ -23,6 +22,14 @@ class PokemonController
             ];
         }
 
-        return $this->pokemonService->savePokemon($data['pokemon']);
+        $payLoad = [
+            'nombre' => $data['nomPokemon'],
+            'numero' => $data['numPokemon'],
+            'habilidad' => $data['habPokemon'],
+            'sprite' => $data['sprtPokemon'],
+            'sprite_url' => $data['urlSprtPokemon'],
+        ];
+
+        return $this->pokemonService->savePokemon($payLoad);
     }
 }

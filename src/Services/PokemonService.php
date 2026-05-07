@@ -2,19 +2,19 @@
 
 namespace App\Services;
 
+use App\Repositories\PokemonRepository;
+
 class PokemonService
 {
-    public function savePokemon(string $name): array
-    {
-        // Aquí irá:
-        // - consumo de API
-        // - guardado en DB
-        // - envío de correo
+    private PokemonRepository $repo;
 
-        // Por ahora simulamos
-        return [
-            'message' => 'Pokemon procesado correctamente',
-            'pokemon' => $name
-        ];
+    public function __construct()
+    {
+        $this->repo = new PokemonRepository();
+    }
+    public function savePokemon(array $data): array
+    {
+        //Aqui luego se validara mas cosas
+        return $this->repo->save($data);
     }
 }

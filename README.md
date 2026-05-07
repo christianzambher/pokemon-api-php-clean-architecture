@@ -44,3 +44,11 @@ El proyecto sigue una arquitectura por capas:
 - Services: lógica de negocio
 - Repositories: acceso a datos (pendiente)
 - Clients: consumo de APIs externas
+
+## Base de Datos
+
+El proyecto utiliza un stored procedure:
+
+spRegistrarPokemon
+
+Encargado de persistir la información del Pokémon en la base de datos.
