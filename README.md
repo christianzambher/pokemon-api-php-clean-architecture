@@ -261,3 +261,14 @@ Swagger UI disponible en:
 ```text
 /public/docs
 ```
+
+## Frontend Structure
+
+```text
+public/views
+├── index.php
+└── partials
+    ├── mail-modal.php
+    ├── delete-modal.php
+    └── save-modal.php
+```

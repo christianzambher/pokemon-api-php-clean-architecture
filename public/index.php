@@ -5,6 +5,18 @@ require_once __DIR__ . '/../src/Config/bootstrap.php';
 use App\Router;
 use App\Controllers\PokemonController;
 
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+$basePath = '/pokemon-api-php-clean-architecture/public';
+
+$route = str_replace($basePath, '', $uri);
+
+if ($uri === '/' || $uri === '/pokemon-api-php-clean-architecture/public/') {
+    require __DIR__ . '/views/index.php';
+
+    exit;
+}
+
 header('Content-Type: application/json');
 
 try {
@@ -63,12 +75,11 @@ try {
             'data' => $result
         ]);
     });
-
-    // Ejecutar router
-    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    
     $method = $_SERVER['REQUEST_METHOD'];
 
-    $router->dispatch($method, $uri);
+    // Ejecutar router
+    $router->dispatch($method, $route);
 } catch (\PDOException $e) {
     http_response_code(500);
 
