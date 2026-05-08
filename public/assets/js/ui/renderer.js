@@ -42,7 +42,7 @@ function createPokemonCard(pokemon) {
 
                     <button
                         class="btn btn-lg btn-primary text-light rounded-circle"
-                        onclick="preSavePokemon(${pokemonId})"
+                        data-pokemon-id="${pokemonId}"
                         title="Guardar">
 
                         <i class="fas fa-save"></i>
@@ -51,7 +51,7 @@ function createPokemonCard(pokemon) {
 
                     <button
                         class="btn btn-lg btn-danger text-light rounded-circle"
-                        onclick="preDeletePokemon(${pokemonId})"
+                        data-pokemon-id="${pokemonId}"
                         title="Eliminar">
 
                         <i class="fas fa-trash"></i>
@@ -60,7 +60,7 @@ function createPokemonCard(pokemon) {
 
                     <button
                         class="btn btn-lg btn-secondary text-light rounded-circle"
-                        onclick="preSendPokemon(${pokemonId})"
+                        data-pokemon-id="${pokemonId}"
                         title="Enviar">
 
                         <i class="fas fa-paper-plane"></i>
