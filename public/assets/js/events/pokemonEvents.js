@@ -1,3 +1,7 @@
+const pokemonState = {
+    currentPokemon: null
+};
+
 async function loadPokemonAbilities(url, pokemonId) {
 
     try {
@@ -128,4 +132,65 @@ async function preSendPokemon(pokemonId) {
 
         console.error(error);
     }
+}
+
+function processDeletePokemon(result) {
+
+    $('#txtNumPokeDelete')
+        .val(result.id);
+}
+
+function processSendPokemon(result) {
+
+    pokemonState.currentPokemon = {
+
+        name: result.name,
+        abilities: result.abilities,
+        baseExperience: result.base_experience,
+        sprites: result.sprites
+    };
+}
+
+function processSavePokemon(result) {
+
+    pokemonState.currentPokemon = result;
+
+    $('#txtNumPokemon')
+        .val(result.id);
+
+    $('#txtNombrePoke')
+        .val(result.name);
+
+    $('#txtExpBase')
+        .val(result.base_experience);
+
+    $('#txtHabilidad1')
+        .val(result.abilities[0]?.ability?.name ?? '');
+
+    $('#txtHabilidad2')
+        .val(result.abilities[1]?.ability?.name ?? '');
+
+    $('#txtspriteDesc1')
+        .val(`back_default_${result.name}`);
+
+    $('#txtspriteUrl1')
+        .val(result.sprites.back_default);
+
+    $('#txtspriteDesc2')
+        .val(`back_shiny_${result.name}`);
+
+    $('#txtspriteUrl2')
+        .val(result.sprites.back_shiny);
+
+    $('#txtspriteDesc3')
+        .val(`front_default_${result.name}`);
+
+    $('#txtspriteUrl3')
+        .val(result.sprites.front_default);
+
+    $('#txtspriteDesc4')
+        .val(`front_shiny_${result.name}`);
+
+    $('#txtspriteUrl4')
+        .val(result.sprites.front_shiny);
 }

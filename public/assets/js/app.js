@@ -17,12 +17,8 @@ $(document).ready(async function () {
         });
 
     } catch (error) {
-
-        console.error(error);
-
-        Swal.fire({
-            icon: 'error',
-            title: 'Error loading Pokemon list'
-        });
+        showErrorAlert(
+            'Algo ha salido mal'
+        );
     }
 });
