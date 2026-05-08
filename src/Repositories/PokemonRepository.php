@@ -10,7 +10,14 @@ class PokemonRepository
 
     public function __construct()
     {
-        $this->db = new PDO($_ENV['DB_DSN'], $_ENV['DB_USER'], $_ENV['DB_PASS']);   
+        $this->db = new PDO(
+            $_ENV['DB_DSN'], 
+            $_ENV['DB_USER'], 
+            $_ENV['DB_PASS'],
+            [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            ]
+        );   
     }
 
     public function save(array $data): array

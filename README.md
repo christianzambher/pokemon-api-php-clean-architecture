@@ -224,3 +224,12 @@ Implementado mediante:
 - PHPMailer
 - SMTP
 - Variables de entorno
+
+## Manejo de Errores
+
+La API implementa manejo global de excepciones para:
+
+- Base de datos
+- API externa
+- SMTP
+- Validaciones
