@@ -24,4 +24,8 @@ class PokemonController
 
         return $this->pokemonService->savePokemon($data['pokemon']);
     }
+    public function get(string $name): array
+    {
+        return $this->pokemonService->getPokemon($name);
+    }
 }

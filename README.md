@@ -202,6 +202,12 @@ Body:
 }
 ```
 
+## Obtener Pokémon
+
+```http
+GET /pokemon?name=pikachu
+```
+
 ## Configuración de Correo
 
 Agregar las siguientes variables al archivo `.env`:

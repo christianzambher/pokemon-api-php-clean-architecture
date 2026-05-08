@@ -41,4 +41,31 @@ class PokemonRepository
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function findByName(string $name): array|null
+    {
+        $sql = "
+            SELECT
+                p.Nombre_Pokemon,
+                p.Numero_Pokemon,
+                h.Nombre_Habilidad,
+                s.Descripcion_Sprite,
+                s.Url_Sprite
+            FROM pokemones p
+            INNER JOIN habilidades h
+                ON p.Id_Habilidad = h.Id_Habilidad
+            INNER JOIN sprites s
+                ON p.Id_Sprite = s.Id_Sprite
+            WHERE LOWER(p.Nombre_Pokemon) = LOWER(:name)
+        ";
+
+        $stmt = $this->db->prepare($sql);
+
+        $stmt->bindValue(':name', $name);
+        $stmt->execute();
+
+        $pokemon = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return $pokemon ?: null;
+    }
 }

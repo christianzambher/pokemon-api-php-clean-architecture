@@ -33,4 +33,15 @@ class PokemonService
             'pokemon' => $pokemonData
         ];
     }
+
+    public function getPokemon(string $name): array
+    {
+        $pokemon = $this->repo->findByName($name);
+
+        if (!$pokemon) {
+            throw new \Exception('Pokemon not found');
+        }
+
+        return $pokemon;
+    }
 }

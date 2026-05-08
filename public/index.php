@@ -18,7 +18,6 @@ try {
         ]);
     });
 
-    // Ruta real (la que reemplazará savePokemon.php)
     $router->add('POST', '/pokemon', function () {
         $controller = new PokemonController();
         $result = $controller->save($_POST);
@@ -26,6 +25,29 @@ try {
         echo json_encode([
             'success' => true,
             'data' => $result
+        ]);
+    });
+
+    $router->add('GET', '/pokemon', function () {
+        if (!isset($_GET['name'])) {
+
+            http_response_code(400);
+
+            echo json_encode([
+                'success' => false,
+                'message' => 'Pokemon name is required'
+            ]);
+
+            return;
+        }
+
+        $controller = new PokemonController();
+
+        $pokemon = $controller->get($_GET['name']);
+
+        echo json_encode([
+            'success' => true,
+            'data' => $pokemon
         ]);
     });
 
