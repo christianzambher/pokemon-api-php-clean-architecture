@@ -1,0 +1,79 @@
+openapi: 3.0.0
+
+info:
+  title: Pokemon API PHP Clean Architecture
+  version: 1.0.0
+  description: API for managing Pokemon records
+
+servers:
+  - url: http://localhost/pokemon-api-php-clean-architecture/public
+
+paths:
+
+  /pokemon:
+
+    post:
+      summary: Register a Pokemon
+
+      requestBody:
+        required: true
+
+        content:
+          application/json:
+            schema:
+              type: object
+
+              properties:
+                pokemon:
+                  type: string
+                  example: pikachu
+
+      responses:
+        '200':
+          description: Pokemon registered successfully
+
+        '409':
+          description: Pokemon already exists
+
+    get:
+      summary: Get Pokemon by name
+
+      parameters:
+        - in: query
+          name: name
+          required: true
+
+          schema:
+            type: string
+
+          example: pikachu
+
+      responses:
+        '200':
+          description: Pokemon found
+
+        '404':
+          description: Pokemon not found
+
+    delete:
+      summary: Delete Pokemon
+
+      requestBody:
+        required: true
+
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+
+              properties:
+                number:
+                  type: integer
+                  example: 25
+
+      responses:
+        '200':
+          description: Pokemon deleted
+
+        '404':
+          description: Pokemon not found

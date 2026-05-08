@@ -253,3 +253,11 @@ La API implementa manejo global de excepciones para:
 - API externa
 - SMTP
 - Validaciones
+
+## API Documentation
+
+Swagger UI disponible en:
+
+```text
+/public/docs
+```
