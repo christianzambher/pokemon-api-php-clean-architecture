@@ -44,4 +44,13 @@ class PokemonService
 
         return $pokemon;
     }
+
+    public function deletePokemon(int $number): array
+    {
+        $this->repo->delete($number);
+
+        return [
+            'message' => 'Pokemon deleted successfully'
+        ];
+    }
 }

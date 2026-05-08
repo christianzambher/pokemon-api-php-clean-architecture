@@ -208,6 +208,20 @@ Body:
 GET /pokemon?name=pikachu
 ```
 
+## Eliminar Pokémon
+
+```http
+DELETE /pokemon
+```
+
+Body:
+
+```json
+{
+  "number": 25
+}
+```
+
 ## Configuración de Correo
 
 Agregar las siguientes variables al archivo `.env`:

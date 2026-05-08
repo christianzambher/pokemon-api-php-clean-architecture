@@ -28,4 +28,14 @@ class PokemonController
     {
         return $this->pokemonService->getPokemon($name);
     }
+    public function delete(array $data): array
+    {
+        if (!isset($data['number'])) {
+            throw new \Exception('Pokemon number is required');
+        }
+
+        return $this->pokemonService->deletePokemon(
+            (int) $data['number']
+        );
+    }
 }

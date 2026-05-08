@@ -51,6 +51,19 @@ try {
         ]);
     });
 
+    $router->add('DELETE', '/pokemon', function () {
+        parse_str(file_get_contents("php://input"), $data);
+
+        $controller = new PokemonController();
+
+        $result = $controller->delete($data);
+
+        echo json_encode([
+            'success' => true,
+            'data' => $result
+        ]);
+    });
+
     // Ejecutar router
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $method = $_SERVER['REQUEST_METHOD'];
@@ -62,12 +75,22 @@ try {
     $message = $e->getMessage();
 
     if (str_contains($message, 'POKEMON YA EXISTENTE')) {
-
         http_response_code(409);
 
         echo json_encode([
             'success' => false,
             'message' => 'Pokemon already exists'
+        ]);
+
+        exit;
+    }
+
+    if (str_contains($message, 'POKEMON NO EXISTENTE')) {
+        http_response_code(404);
+
+        echo json_encode([
+            'success' => false,
+            'message' => 'Pokemon not found'
         ]);
 
         exit;

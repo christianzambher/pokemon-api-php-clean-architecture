@@ -68,4 +68,14 @@ class PokemonRepository
 
         return $pokemon ?: null;
     }
+
+    public function delete(int $number): bool
+    {
+        $sql = "CALL spBorrarPokemon(:number)";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':number', $number);
+
+        return $stmt->execute();
+    }
 }
