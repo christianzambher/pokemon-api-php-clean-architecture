@@ -30,6 +30,9 @@
     <!-- MODAL GUARDAR -->
     <?php require __DIR__ . '/partials/save-modal.php'; ?>
 
-    <script src="/pokemon-api-php-clean-architecture/public/assets/js/index.js"></script>
+    <script src="/pokemon-api-php-clean-architecture/public/assets/js/api/pokemonApi.js"></script>
+    <script src="/pokemon-api-php-clean-architecture/public/assets/js/ui/renderer.js"></script>
+    <script src="/pokemon-api-php-clean-architecture/public/assets/js/events/pokemonEvents.js"></script>
+    <script src="/pokemon-api-php-clean-architecture/public/assets/js/app.js"></script>
 </body>
 </html>
