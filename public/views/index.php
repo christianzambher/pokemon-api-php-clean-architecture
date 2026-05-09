@@ -31,9 +31,9 @@
     <?php require __DIR__ . '/partials/save-modal.php'; ?>
 
     <script src="/assets/js/api/pokemonApi.js"></script>
+    <script src="/assets/js/app.js"></script>
     <script src="/assets/js/ui/alerts.js"></script>
     <script src="/assets/js/ui/renderer.js"></script>
     <script src="/assets/js/events/pokemonEvents.js"></script>
-    <script src="/assets/js/app.js"></script>
 </body>
 </html>

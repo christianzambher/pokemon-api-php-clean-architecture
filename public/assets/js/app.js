@@ -1,31 +1,6 @@
-$(document).ready(async function () {
-
-    const appState = {
-        registeredPokemons: []
-    };
-
-    try {
-
-        const response = await getPokemonList();
-
-        renderPokemonList(response.results);
-
-        response.results.forEach(pokemon => {
-
-            const pokemonId = pokemon.url.split('/')[6];
-
-            loadPokemonAbilities(
-                pokemon.url,
-                pokemonId
-            );
-        });
-
-    } catch (error) {
-        showErrorAlert(
-            'Algo ha salido mal'
-        );
-    }
-});
+const appState = {
+    registeredPokemons: []
+};
 
 async function initializeApp() {
 
@@ -40,7 +15,18 @@ async function initializeApp() {
         const response =
             await getPokemonList();
 
-        renderPokemonCards(response.results);
+        renderPokemonList(response.results);
+
+         response.results.forEach(pokemon => {
+
+            const pokemonId =
+                pokemon.url.split('/')[6];
+
+            loadPokemonAbilities(
+                pokemon.url,
+                pokemonId
+            );
+        });
 
     } catch (error) {
 
