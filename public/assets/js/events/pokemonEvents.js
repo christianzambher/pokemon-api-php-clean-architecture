@@ -204,12 +204,15 @@ $(document).on(
             const payload =
                 buildPokemonPayload();
 
-            console.log(payload);
-
             const response =
                 await savePokemon(payload);
 
-            console.log(response);
+            appState.registeredPokemons.push({
+                Numero_Pokemon: payload.number,
+                Nombre_Pokemon: payload.name
+            });
+
+            await refreshPokemonUI();
 
             showSuccessAlert(
                 response.message ??
