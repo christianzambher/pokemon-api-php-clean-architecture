@@ -4,6 +4,7 @@ require_once __DIR__ . '/../src/Config/bootstrap.php';
 
 use App\Router;
 use App\Controllers\PokemonController;
+use App\Controllers\MailController;
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -89,6 +90,22 @@ try {
         echo json_encode([
             'success' => true,
             'data' => $result
+        ]);
+    });
+
+    $router->add('POST', '/mail', function () {
+        $payload = json_decode(
+            file_get_contents('php://input'),
+            true
+        );
+
+        $controller = new MailController();
+
+        $result = $controller->send($payload);
+
+        echo json_encode([
+            'success' => true,
+            'message' => $result
         ]);
     });
     

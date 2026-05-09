@@ -49,7 +49,8 @@ function sendPokemonMail(data) {
     return $.ajax({
         url: `${LOCAL_API_URL}/mail`,
         method: 'POST',
-        data: data
+        contentType: 'application/json',
+        data: JSON.stringify(data)
     });
 }
 

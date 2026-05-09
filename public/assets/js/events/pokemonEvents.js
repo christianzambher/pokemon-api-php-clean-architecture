@@ -332,3 +332,34 @@ $('#txtEmail').on(
             );
     }
 );
+
+$(document).on(
+    'click',
+    '#btnEnviarCorreo',
+    async function () {
+        try {
+            const payload = {
+                email: $('#txtEmail').val(),
+                pokemon: pokemonState.currentPokemon
+            };
+
+            const response = await sendPokemonMail(payload);
+
+            $('#modalEnvioCorreo').modal('hide');
+
+            $('#txtEmail').val('');
+
+            showSuccessAlert(
+                response.message ??
+                'Correo enviado correctamente'
+            );
+        } catch (error) {
+            console.error(error);
+
+            showErrorAlert(
+                error.responseJSON?.message ??
+                'Error enviando correo'
+            );
+        }
+    }
+);
