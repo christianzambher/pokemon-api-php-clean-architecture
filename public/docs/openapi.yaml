@@ -3,16 +3,26 @@ openapi: 3.0.0
 info:
   title: Pokemon API PHP Clean Architecture
   version: 1.0.0
-  description: API for managing Pokemon records
+  description: API for managing Pokemon records and mail notifications
 
 servers:
   - url: http://localhost/pokemon-api-php-clean-architecture/public
+
+tags:
+  - name: Pokemon
+    description: Pokemon management endpoints
+
+  - name: Mail
+    description: Pokemon mail endpoints
 
 paths:
 
   /pokemon:
 
     post:
+      tags:
+        - Pokemon
+
       summary: Register a Pokemon
 
       requestBody:
@@ -20,13 +30,45 @@ paths:
 
         content:
           application/json:
+
             schema:
               type: object
 
               properties:
-                pokemon:
+
+                name:
                   type: string
                   example: pikachu
+
+                number:
+                  type: integer
+                  example: 25
+
+                abilities:
+                  type: array
+
+                  items:
+                    type: string
+
+                  example:
+                    - static
+                    - lightning-rod
+
+                sprites:
+                  type: array
+
+                  items:
+                    type: object
+
+                    properties:
+
+                      description:
+                        type: string
+                        example: front_default_pikachu
+
+                      url:
+                        type: string
+                        example: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png
 
       responses:
         '200':
@@ -35,7 +77,13 @@ paths:
         '409':
           description: Pokemon already exists
 
+        '500':
+          description: Internal server error
+
     get:
+      tags:
+        - Pokemon
+
       summary: Get Pokemon by name
 
       parameters:
@@ -55,7 +103,13 @@ paths:
         '404':
           description: Pokemon not found
 
+        '500':
+          description: Internal server error
+
     delete:
+      tags:
+        - Pokemon
+
       summary: Delete Pokemon
 
       requestBody:
@@ -63,17 +117,75 @@ paths:
 
         content:
           application/x-www-form-urlencoded:
+
             schema:
               type: object
 
               properties:
+
                 number:
                   type: integer
                   example: 25
 
       responses:
         '200':
-          description: Pokemon deleted
+          description: Pokemon deleted successfully
 
         '404':
           description: Pokemon not found
+
+        '500':
+          description: Internal server error
+
+  /mail:
+
+    post:
+      tags:
+        - Mail
+
+      summary: Send Pokemon information by email
+
+      requestBody:
+        required: true
+
+        content:
+          application/json:
+
+            schema:
+              type: object
+
+              properties:
+
+                email:
+                  type: string
+                  example: test@example.com
+
+                pokemon:
+                  type: object
+
+                  properties:
+
+                    name:
+                      type: string
+                      example: pikachu
+
+                    baseExperience:
+                      type: integer
+                      example: 112
+
+                    abilities:
+                      type: array
+
+                      items:
+                        type: string
+
+                      example:
+                        - static
+                        - lightning-rod
+
+      responses:
+        '200':
+          description: Email sent successfully
+
+        '500':
+          description: Error sending email
