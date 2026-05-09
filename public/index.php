@@ -80,6 +80,17 @@ try {
             'data' => $result
         ]);
     });
+
+    $router->add('GET', '/pokemon/registered', function () {
+        $controller = new PokemonController();
+
+        $result = $controller->registed();
+
+        echo json_encode([
+            'success' => true,
+            'data' => $result
+        ]);
+    });
     
     $method = $_SERVER['REQUEST_METHOD'];
 

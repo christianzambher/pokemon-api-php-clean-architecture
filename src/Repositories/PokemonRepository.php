@@ -92,6 +92,6 @@ class PokemonRepository
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
 
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
