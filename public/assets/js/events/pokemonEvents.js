@@ -112,7 +112,6 @@ async function preDeletePokemon(pokemonId) {
 }
 
 async function preSendPokemon(pokemonId) {
-
     try {
 
         const result =
@@ -135,10 +134,49 @@ async function preSendPokemon(pokemonId) {
 }
 
 function processDeletePokemon(result) {
-
     $('#txtNumPokeDelete')
         .val(result.id);
 }
+
+$('#btnEliminarDatos').on(
+    'click',
+    async function () {
+
+        try {
+
+            const pokemonNumber =
+                $('#txtNumPokeDelete').val();
+
+            const response =
+                await deletePokemon(
+                    pokemonNumber
+                );
+
+            removeRegisteredPokemon(
+                pokemonNumber
+            );
+
+            await refreshPokemonUI();
+
+            $('#modalEliminarDatos')
+                .modal('hide');
+
+            showSuccessAlert(
+                response.message ??
+                'Pokemon eliminado correctamente'
+            );
+
+        } catch (error) {
+
+            console.error(error);
+
+            showErrorAlert(
+                error.responseJSON?.message ??
+                'Error eliminando Pokemon'
+            );
+        }
+    }
+);
 
 function processSendPokemon(result) {
 
@@ -272,4 +310,13 @@ function buildPokemonPayload() {
             }
         ]
     };
+}
+
+function removeRegisteredPokemon(pokemonNumber) {
+    appState.registeredPokemons =
+        appState.registeredPokemons.filter(
+            pokemon =>
+                Number(pokemon.Numero_Pokemon)
+                !== Number(pokemonNumber)
+        );
 }
