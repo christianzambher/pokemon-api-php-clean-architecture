@@ -194,3 +194,79 @@ function processSavePokemon(result) {
     $('#txtspriteUrl4')
         .val(result.sprites.front_shiny);
 }
+
+$(document).on(
+    'click',
+    '#btnGuardarDatos',
+    async function () {
+
+        try {
+            const payload =
+                buildPokemonPayload();
+
+            console.log(payload);
+
+            const response =
+                await savePokemon(payload);
+
+            console.log(response);
+
+            showSuccessAlert(
+                response.message ??
+                'Pokemon registrado correctamente'
+            );
+
+            $('#modalGuardarDatos')
+                .modal('hide');
+
+        } catch (error) {
+
+            console.error(error);
+
+            showErrorAlert(
+                error.responseJSON?.message ??
+                'Error al guardar Pokemon'
+            );
+        }
+    }
+);
+
+function buildPokemonPayload() {
+
+    return {
+
+        name: $('#txtNombrePoke').val(),
+
+        number: $('#txtNumPokemon').val(),
+
+        abilities: [
+
+            $('#txtHabilidad1').val(),
+
+            $('#txtHabilidad2').val()
+        ],
+
+        sprites: [
+
+            {
+                description: $('#txtspriteDesc1').val(),
+                url: $('#txtspriteUrl1').val()
+            },
+
+            {
+                description: $('#txtspriteDesc2').val(),
+                url: $('#txtspriteUrl2').val()
+            },
+
+            {
+                description: $('#txtspriteDesc3').val(),
+                url: $('#txtspriteUrl3').val()
+            },
+
+            {
+                description: $('#txtspriteDesc4').val(),
+                url: $('#txtspriteUrl4').val()
+            }
+        ]
+    };
+}

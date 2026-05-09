@@ -17,10 +17,10 @@ class PokemonService
         $this->apiClient = new PokemonApiClient();
         $this->mailService = new MailService();
     }
-    public function savePokemon(string $pokemonName): array
+    public function savePokemon(array $data): array
     {
         // Obtener Info de la API
-        $pokemonData = $this->apiClient->getPokemon($pokemonName);
+        $pokemonData = $this->apiClient->getPokemon($data['name']);
         
         // Guarda en BD
         $this->repo->save($pokemonData);

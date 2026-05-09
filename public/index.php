@@ -32,7 +32,12 @@ try {
 
     $router->add('POST', '/pokemon', function () {
         $controller = new PokemonController();
-        $result = $controller->save($_POST);
+        $payload = json_decode(
+            file_get_contents('php://input'),
+            true
+        );
+
+        $result = $controller->save($payload);
 
         echo json_encode([
             'success' => true,

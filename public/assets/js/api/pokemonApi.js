@@ -22,9 +22,14 @@ function getPokemonById(id) {
 function savePokemon(data) {
 
     return $.ajax({
+
         url: `${LOCAL_API_URL}/pokemon`,
+
         method: 'POST',
-        data: data
+
+        contentType: 'application/json',
+
+        data: JSON.stringify(data)
     });
 }
 

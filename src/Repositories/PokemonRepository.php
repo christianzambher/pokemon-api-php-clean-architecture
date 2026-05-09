@@ -78,4 +78,20 @@ class PokemonRepository
 
         return $stmt->execute();
     }
+
+    public function getRegisteredPokemons(): array
+    {
+        $sql = "
+            SELECT 
+                Numero_Pokemon,
+                Nombre_Pokemon
+            FROM pokemones
+            ORDER BY Numero_Pokemon ASC
+        ";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
 }

@@ -41,7 +41,7 @@ function createPokemonCard(pokemon) {
                     <hr>
 
                     <button
-                        class="btn btn-lg btn-primary text-light rounded-circle"
+                        class="btn btn-lg btn-primary text-light rounded-circle btn-save-pokemon"
                         data-pokemon-id="${pokemonId}"
                         title="Guardar">
 
@@ -50,7 +50,7 @@ function createPokemonCard(pokemon) {
                     </button>
 
                     <button
-                        class="btn btn-lg btn-danger text-light rounded-circle"
+                        class="btn btn-lg btn-danger text-light rounded-circle btn-delete-pokemon"
                         data-pokemon-id="${pokemonId}"
                         title="Eliminar">
 
@@ -59,7 +59,7 @@ function createPokemonCard(pokemon) {
                     </button>
 
                     <button
-                        class="btn btn-lg btn-secondary text-light rounded-circle"
+                        class="btn btn-lg btn-secondary text-light rounded-circle btn-send-pokemon"
                         data-pokemon-id="${pokemonId}"
                         title="Enviar">
 
