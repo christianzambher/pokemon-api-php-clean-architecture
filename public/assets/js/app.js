@@ -38,4 +38,23 @@ async function initializeApp() {
     }
 }
 
+async function refreshPokemonUI() {
+
+    const response =
+        await getPokemonList();
+
+    renderPokemonList(response.results);
+
+    response.results.forEach(pokemon => {
+
+        const pokemonId =
+            pokemon.url.split('/')[6];
+
+        loadPokemonAbilities(
+            pokemon.url,
+            pokemonId
+        );
+    });
+}
+
 initializeApp();
