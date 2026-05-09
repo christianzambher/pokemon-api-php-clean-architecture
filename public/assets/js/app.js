@@ -26,3 +26,30 @@ $(document).ready(async function () {
         );
     }
 });
+
+async function initializeApp() {
+
+    try {
+
+        const registeredResponse =
+            await getRegisteredPokemons();
+
+        appState.registeredPokemons =
+            registeredResponse.data;
+
+        const response =
+            await getPokemonList();
+
+        renderPokemonCards(response.results);
+
+    } catch (error) {
+
+        console.error(error);
+
+        showErrorAlert(
+            'Error loading Pokemons'
+        );
+    }
+}
+
+initializeApp();

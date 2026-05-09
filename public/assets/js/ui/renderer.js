@@ -1,3 +1,18 @@
+const registered =
+    isPokemonRegistered(pokemonId);
+
+const badge =
+    registered
+        ? `
+            <span class="badge badge-success">
+                Registrado
+            </span>
+        `
+        : '';
+
+const saveDisabled =
+    registered ? 'disabled' : '';
+
 function createPokemonCard(pokemon) {
 
     const pokemonId = pokemon.url.split('/')[6];
