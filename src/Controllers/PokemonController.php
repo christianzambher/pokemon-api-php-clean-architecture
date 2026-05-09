@@ -38,4 +38,9 @@ class PokemonController
             (int) $data['number']
         );
     }
+
+    public function registed(): array
+    {
+        return $this->pokemonService->getRegisteredPokemons();
+    }
 }
