@@ -28,6 +28,7 @@ function createPokemonCard(pokemon) {
                         ${pokemon.name}
                     </h3>
 
+                    ${badge}
                 </div>
 
                 <div class="card-body">
@@ -58,7 +59,9 @@ function createPokemonCard(pokemon) {
                     <button
                         class="btn btn-lg btn-primary text-light rounded-circle btn-save-pokemon"
                         data-pokemon-id="${pokemonId}"
-                        title="Guardar">
+                        title="Guardar"
+                        ${saveDisabled}
+                        >
 
                         <i class="fas fa-save"></i>
 
