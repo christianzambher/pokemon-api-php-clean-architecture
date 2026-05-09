@@ -53,4 +53,9 @@ class PokemonService
             'message' => 'Pokemon deleted successfully'
         ];
     }
+
+    public function getRegisteredPokemons(): array
+    {
+        return $this->repo->getRegisteredPokemons();
+    }
 }
