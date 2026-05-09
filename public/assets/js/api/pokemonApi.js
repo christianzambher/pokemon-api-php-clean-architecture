@@ -52,3 +52,13 @@ function sendPokemonMail(data) {
         data: data
     });
 }
+
+function getRegisteredPokemons() {
+
+    return $.ajax({
+
+        url: `${LOCAL_API_URL}/pokemon/registered`,
+
+        method: 'GET'
+    });
+}
