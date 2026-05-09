@@ -320,3 +320,15 @@ function removeRegisteredPokemon(pokemonNumber) {
                 !== Number(pokemonNumber)
         );
 }
+
+$('#txtEmail').on(
+    'keyup',
+    function () {
+
+        $('#btnEnviarCorreo')
+            .prop(
+                'disabled',
+                !this.value.length
+            );
+    }
+);
