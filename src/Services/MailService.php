@@ -59,4 +59,94 @@ class MailService
             );
         }
     }
+
+    public function sendPokemonMail(array $data): string
+    {
+        $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+
+            $mail->Host =
+                $_ENV['MAIL_HOST'];
+
+            $mail->SMTPAuth = true;
+
+            $mail->Username =
+                $_ENV['MAIL_USERNAME'];
+
+            $mail->Password =
+                $_ENV['MAIL_PASSWORD'];
+
+            $mail->SMTPSecure =
+                PHPMailer::ENCRYPTION_STARTTLS;
+
+            $mail->Port =
+                $_ENV['MAIL_PORT'];
+
+            $mail->setFrom(
+                $_ENV['MAIL_FROM'],
+                $_ENV['MAIL_FROM_NAME']
+            );
+
+            $mail->addAddress(
+                $data['email']
+            );
+
+            $pokemon =
+                $data['pokemon'];
+
+            $mail->isHTML(true);
+
+            $mail->Subject =
+                'Pokemon Information';
+
+            $mail->Body =
+                $this->buildPokemonTemplate(
+                    $pokemon
+                );
+
+            $mail->send();
+
+            return 'Correo enviado correctamente';
+
+        } catch (Exception $e) {
+
+            throw new \Exception(
+                $mail->ErrorInfo
+            );
+        }
+    }
+
+    private function buildPokemonTemplate(array $pokemon): string {
+        $abilities = '';
+
+        foreach (
+            $pokemon['abilities']
+            as $ability
+        ) {
+
+            $abilities .= '
+                <li>' .
+                $ability['ability']['name'] .
+                '</li>
+            ';
+        }
+
+        return "
+            <h1>
+                {$pokemon['name']}
+            </h1>
+
+            <h3>Abilities</h3>
+
+            <ul>
+                {$abilities}
+            </ul>
+
+            <p>
+                Base experience:
+                {$pokemon['baseExperience']}
+            </p>
+        ";
+    }
 }
