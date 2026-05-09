@@ -1,5 +1,9 @@
 $(document).ready(async function () {
 
+    const appState = {
+        registeredPokemons: []
+    };
+
     try {
 
         const response = await getPokemonList();

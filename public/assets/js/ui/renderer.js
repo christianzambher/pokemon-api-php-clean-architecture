@@ -115,3 +115,13 @@ function renderPokemonImages(sprites, pokemonId) {
 
     $(`#divImages${pokemonId}`).html(html);
 }
+
+function isPokemonRegistered(pokemonId) {
+
+    return appState.registeredPokemons
+        .some(
+            pokemon =>
+                Number(pokemon.Numero_Pokemon)
+                === Number(pokemonId)
+        );
+}
