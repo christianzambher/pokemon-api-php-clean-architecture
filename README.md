@@ -1,274 +1,172 @@
 # Pokemon API PHP Clean Architecture
 
-Proyecto backend desarrollado en PHP puro utilizando arquitectura por capas, consumo de APIs externas, procedimientos almacenados y auditoría mediante triggers.
+Proyecto desarrollado en PHP utilizando una arquitectura limpia (Clean Architecture) para consumir la PokeAPI, registrar Pokémon en MySQL y enviar información por correo electrónico.
+
+---
 
 ## Características
 
-- PHP puro con Composer
-- Arquitectura tipo Clean Architecture
-- Consumo de PokeAPI
+- Consumo de API externa (PokeAPI)
+- Arquitectura limpia en PHP
+- API REST personalizada
+- Frontend modularizado con jQuery + Bootstrap
+- Registro de Pokémon en MySQL
+- Eliminación de Pokémon
+- Validación de registros duplicados
+- Envío de correos con PHPMailer
 - Stored Procedures
-- Triggers de auditoría
-- Variables de entorno con dotenv
-- Router personalizado
-- Integración con MySQL
-- Patrón Controller / Service / Repository
+- Triggers para bitácora
+- Swagger/OpenAPI Documentation
+- Indicador visual de Pokémon registrados
 
 ---
 
-# Estructura del Proyecto
+## Tecnologías utilizadas
 
-```bash
-src/
-├── Clients/
-├── Config/
-├── Controllers/
-├── Repositories/
-├── Services/
-
-database/
-├── procedures/
-├── schema/
-├── triggers/
-
-public/
-storage/
-```
-
----
-
-# Tecnologías Utilizadas
-
-- PHP 8+
+- PHP 8
 - MySQL
-- Composer
+- jQuery
+- Bootstrap
 - PHPMailer
-- vlucas/phpdotenv
+- Composer
+- Swagger / OpenAPI
+- Apache
 
 ---
 
-# Configuración del Proyecto
+## Arquitectura del proyecto
+src/  
+├── Config/  
+├── Controllers/  
+├── Services/  
+├── Repositories/  
+├── Infrastructure/  
+├── Mail/  
+├── Docs/  
+  
+public/  
+├── assets/  
+│ ├── css/  
+│ ├── js/  
+│ │ ├── api/  
+│ │ ├── events/  
+│ │ ├── ui/  
+│ │ └── app.js  
+│
+├── views/  
+│ ├── partials/  
+│ └── index.php  
 
-## 1. Clonar repositorio
+database/  
+├── tables/  
+├── procedures/  
+└── triggers/  
+
+
+---
+
+## Instalación
+
+### 1. Clonar repositorio
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/TU-USUARIO/pokemon-api-php-clean-architecture.git
 ```
 
----
-
-## 2. Instalar dependencias
-
+### 2. Instalar dependencias
 ```bash
 composer install
 ```
 
----
-
-## 3. Configurar variables de entorno
-
-Crear archivo:
-
-```bash
-.env
+### 3. Crear archivo .env
 ```
-
-Basado en:
-
-```bash
-.env.example
-```
-
-Ejemplo:
-
-```env
-DB_DSN=mysql:host=localhost;dbname=Pokedex
+DB_HOST=localhost
+DB_NAME=pokedex
 DB_USER=root
-DB_PASS=
+DB_PASSWORD=
+
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=correo@gmail.com
+MAIL_PASSWORD=password_app
+MAIL_FROM=correo@gmail.com
+MAIL_FROM_NAME=Pokemon API
 ```
 
----
+### 4. Configurar base de datos
+database/tables/create_tables.sql
+database/procedures/
+database/triggers/
 
-# Base de Datos
-
-## Crear estructura
-
-Ejecutar:
-
-```bash
-database/schema/create_tables.sql
+## Ejecutar proyecto
+### Opción 1 — Apache/WAMP
 ```
-
----
-
-## Crear Stored Procedures
-
-Ejecutar:
-
-```bash
-database/procedures/spRegistrarPokemon.sql
-database/procedures/spBorrarPokemon.sql
+http://localhost/pokemon-api-php-clean-architecture/public
 ```
-
----
-
-## Crear Triggers
-
-Ejecutar:
-
-```bash
-database/triggers/pokemon_triggers.sql
-database/triggers/habilidad_triggers.sql
-database/triggers/sprite_triggers.sql
+###
 ```
-
----
-
-# Arquitectura
-
-El proyecto implementa separación de responsabilidades:
-
-## Controllers
-Manejo de request y response.
-
-## Services
-Lógica de negocio.
-
-## Repositories
-Persistencia y acceso a base de datos.
-
-## Clients
-Consumo de APIs externas.
-
----
-
-# Auditoría
-
-Los triggers registran automáticamente:
-
-- INSERT
-- UPDATE
-- DELETE
-
-sobre las entidades principales.
-
-Los eventos son almacenados en la tabla:
-
-```bash
-Bitacoras
-```
-
----
-
-# API Externa
-
-El proyecto consume información desde:
-
-https://pokeapi.co/
-
----
-
-# Desarrollo
-
-Actualizar autoload de Composer:
-
-```bash
-composer dump-autoload
-```
-
----
-
-# Ejecutar proyecto
-
-```bash
 php -S localhost:8000 -t public
+``` 
+Abrir: 
+```
+http://localhost:8000
 ```
 
----
-
-# Endpoint Actual
-
-## Registrar Pokémon
-
-```http
-POST /pokemon
+## Endpoints API
+### Obtener Pokémon
 ```
-
-Body:
-
-```json
-{
-  "pokemon": "pikachu"
-}
-```
-
-## Obtener Pokémon
-
-```http
 GET /pokemon?name=pikachu
 ```
 
-## Eliminar Pokémon
-
-```http
-DELETE /pokemon
+### Registrar Pokémon
 ```
-
-Body:
-
-```json
+POST /pokemon
+```
+#### Body:
+```
 {
+  "name": "pikachu",
   "number": 25
 }
 ```
 
-## Configuración de Correo
-
-Agregar las siguientes variables al archivo `.env`:
-
-```env
-MAIL_HOST=
-MAIL_PORT=
-MAIL_USERNAME=
-MAIL_PASSWORD=
-MAIL_FROM=
-MAIL_FROM_NAME=
+### Eliminar Pokémon
+```
+DELETE /pokemon
 ```
 
-## Notificaciones por Correo
-
-El sistema envía automáticamente una notificación al registrar un Pokémon.
-
-Implementado mediante:
-
-- PHPMailer
-- SMTP
-- Variables de entorno
-
-## Manejo de Errores
-
-La API implementa manejo global de excepciones para:
-
-- Base de datos
-- API externa
-- SMTP
-- Validaciones
-
-## API Documentation
-
-Swagger UI disponible en:
-
-```text
-/public/docs
+### Enviar correo
+```
+POST /mail
 ```
 
-## Frontend Structure
-
-```text
-public/views
-├── index.php
-└── partials
-    ├── mail-modal.php
-    ├── delete-modal.php
-    └── save-modal.php
+## Swagger Documentation
 ```
+http://localhost:8000/docs
+```
+
+## Funcionalidades del frontend
+* Listado dinámico desde PokeAPI
+* Modal para guardar Pokémon
+* Modal para eliminar Pokémon
+* Modal para envío de correo
+* Cards dinámicas
+* Renderizado de habilidades
+* Renderizado de sprites
+* Indicador visual de Pokémon registrados
+* Botón guardar deshabilitado para Pokémon existentes
+* Base de datos
+
+## El proyecto utiliza:
+* Stored Procedures
+* Triggers
+* Relaciones entre tablas
+* Bitácora de acciones
+
+## Triggers implementados
+### INSERT
+Registro automático en bitácora.
+### UPDATE
+Registro automático en bitácora.
+### DELETE
+Registro automático en bitácora.
